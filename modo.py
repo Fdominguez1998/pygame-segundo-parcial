@@ -1,4 +1,4 @@
-DEBUG = False
+DEBUG = True
 
 def cambiar_modo():
     global DEBUG

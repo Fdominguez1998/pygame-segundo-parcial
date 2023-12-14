@@ -6,7 +6,7 @@ from modo import *
 from class_enemigo import *
 from class_disparo import *
 from class_nivel import *
-from plataformas import *
+from class_plataforma import *
 
 
 class nivel_dos(nivel):
@@ -34,35 +34,64 @@ class nivel_dos(nivel):
         diccionario_animaciones["dispara"] = personaje_dispara
         diccionario_animaciones["muere"] = personaje_muere
 
-        mario = Personaje(diccionario_animaciones, 50,160,(90,80), 15, "quieto")
+        megaman = Personaje(diccionario_animaciones, 50,160,(90,80), 5, "quieto")
 
         #plataformas
-        piso = crear_plataforma(False, (ANCHO, 20), (0, 907))
+        piso = Plataforma(False, (ANCHO, 20), (0, 907), "", "SUELO")
 
 
-        plataforma_caño = crear_plataforma(True, (150,150), (900, 781), "Imagen juego2\caja.png")
+        plataforma_caño = Plataforma(True, (150,150), (900, 781), "Imagen juego2\caja.png", "OBSTACULO")
 
-        plataforma_2 = crear_plataforma(True, (800,50), (1100, 630), "Imagen juego2\Plataforma.png")
+        plataforma_2 = Plataforma(True, (800,50), (1100, 610), "Imagen juego2\Plataforma.png", "ELEVACION")
 
-        plataforma_3 = crear_plataforma(True, (800,50), (100, 470), "Imagen juego2\Plataforma.png")
+        plataforma_3 = Plataforma(True, (800,50), (100, 470), "Imagen juego2\Plataforma.png", "ELEVACION")
 
-        plataforma_4 = crear_plataforma(True, (800,50), (500, 800), "Imagen juego2\Plataforma.png")
+        
 
-        lista_plataformas = [piso, plataforma_caño , plataforma_2, plataforma_3, plataforma_4]
 
-        mario.rectangulo.bottom = piso["rectangulo"].top
+        
+        
+
+        lista_plataformas = [piso, plataforma_caño , plataforma_2, plataforma_3]
+
+        megaman.rectangulo.bottom = piso.rectangulo.top
 
         #ENEMIGO
-        diccionario_animaciones_enemigo = {"izquierda" : enemigo_camina, "derecha" : enemigo_camina_derecha, "muerto": enemigo_muerto}
-        un_enemigo = Enemigo(diccionario_animaciones_enemigo)
-        d = {"muerto": diccionario_animaciones_enemigo["muerto"]}
-        reescalar_imagenes(d, (50,25))
-
-        un_enemigo.rectangulo.bottom = piso["rectangulo"].top
-
-        lista_enemigos = [un_enemigo]
+        diccionario_animaciones_enemigo = {}
+        diccionario_animaciones_enemigo["derecha"] = enemigo_camina_derecha
+        diccionario_animaciones_enemigo["izquierda"] = enemigo_camina
+        diccionario_animaciones_enemigo["muerto"] = enemigo_muerto
 
 
+        un_enemigo = Enemigo(diccionario_animaciones_enemigo, megaman, "izquierda", 1100, 1800, 4, 3)
+        
+        # d = {"muerto": diccionario_animaciones_enemigo["muerto"]}
+        # reescalar_imagenes(d, (50,25))
 
 
-        super().__init__(pantalla, mario, lista_enemigos, lista_plataformas, fondo)
+        diccionario_animaciones_segundo_enemigo = {}
+        diccionario_animaciones_segundo_enemigo["derecha"] = enemigo_camina_derecha
+        diccionario_animaciones_segundo_enemigo["izquierda"] = enemigo_camina
+        diccionario_animaciones_segundo_enemigo["muerto"] = enemigo_muerto
+
+
+        
+
+        segundo_enemigo = Enemigo(diccionario_animaciones_segundo_enemigo, megaman, "izquierda", 200, 500, 5, 4)
+        
+        # d = {"muerto": diccionario_animaciones_enemigo["muerto"]}
+        # reescalar_imagenes(d, (50,25))
+
+
+        un_enemigo.rectangulo.bottom = piso.rectangulo.top
+
+        segundo_enemigo.rectangulo.bottom = plataforma_3.rectangulo.top
+        
+        
+
+        lista_enemigos = [un_enemigo, segundo_enemigo]
+
+
+
+    
+        super().__init__(pantalla, megaman, lista_enemigos, lista_plataformas, fondo)

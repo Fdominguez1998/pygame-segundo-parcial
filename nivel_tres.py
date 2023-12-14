@@ -9,7 +9,7 @@ from class_nivel import *
 from class_plataforma import *
 
 
-class nivel_uno(nivel):
+class nivel_tres(nivel):
     def __init__(self, pantalla):
         ##############################INICIALIZACIONES##########################################
 
@@ -44,13 +44,14 @@ class nivel_uno(nivel):
 
         plataforma_2 = Plataforma(True, (800,50), (1100, 610), "Imagen juego2\Plataforma.png", "ELEVACION")
 
-        
+        plataforma_3 = Plataforma(True, (800,50), (100, 470), "Imagen juego2\Plataforma.png", "ELEVACION")
+
+        plataforma_4 = Plataforma(True, (700,50), (1150, 350), "Imagen juego2\Plataforma.png", "ELEVACION")
 
         
         
-        
 
-        lista_plataformas = [piso, plataforma_caño , plataforma_2]
+        lista_plataformas = [piso, plataforma_caño , plataforma_2, plataforma_3, plataforma_4]
 
         megaman.rectangulo.bottom = piso.rectangulo.top
 
@@ -62,12 +63,32 @@ class nivel_uno(nivel):
         
         un_enemigo = Enemigo(diccionario_animaciones_enemigo, megaman, "izquierda", 1200, 1700, 3, 3)
 
-        muerto = {"muerto": diccionario_animaciones_enemigo["muerto"]}
-        reescalar_imagenes(muerto, (50,25))
+        # d = {"muerto": diccionario_animaciones_enemigo["muerto"]}
+        # reescalar_imagenes(d, (50,25))
+
+        diccionario_animaciones_segundo_enemigo = {}
+        diccionario_animaciones_segundo_enemigo["derecha"] = enemigo_camina_derecha
+        diccionario_animaciones_segundo_enemigo["izquierda"] = enemigo_camina
+        diccionario_animaciones_segundo_enemigo["muerto"] = enemigo_muerto
+        
+        segundo_enemigo = Enemigo(diccionario_animaciones_segundo_enemigo, megaman, "izquierda", 1200, 1700, 3, 3)
+
+
+        diccionario_animaciones_tercer_enemigo = {}
+        diccionario_animaciones_tercer_enemigo["derecha"] = enemigo_camina_derecha
+        diccionario_animaciones_tercer_enemigo["izquierda"] = enemigo_camina
+        diccionario_animaciones_tercer_enemigo["muerto"] = enemigo_muerto
+
+        tercer_enemigo = Enemigo(diccionario_animaciones_segundo_enemigo, megaman, "izquierda", 200, 500, 5, 4)
+
 
         un_enemigo.rectangulo.bottom = plataforma_2.rectangulo.top
+        segundo_enemigo.rectangulo.bottom = plataforma_4.rectangulo.top
+        tercer_enemigo.rectangulo.bottom = plataforma_3.rectangulo.top
 
-        lista_enemigos = [un_enemigo]
+
+
+        lista_enemigos = [un_enemigo, segundo_enemigo, tercer_enemigo]
 
 
 

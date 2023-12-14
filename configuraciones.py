@@ -1,4 +1,14 @@
 import pygame
+pygame.mixer.init()
+# Constantes
+WIDTH, HEIGHT = 800, 600
+BLACK = (0, 0, 0)
+GREY = (220, 220, 220)
+WHITE = (255, 255, 255)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLUE = (0, 0, 255)
+FPS = 60  # Para desacelerar la pantalla
 
 #GIRA IMAGENES 
 def girar_imagenes(lista_original, flip_x, flip_y):
@@ -62,3 +72,13 @@ enemigo_muerto = [pygame.image.load(r"Imagenes\Enemigos\Muerte\0.png"),
                      pygame.image.load(r"Imagenes\Enemigos\Muerte\0.png"),
                      pygame.image.load(r"Imagenes\Enemigos\Muerte\0.png"),
                      pygame.image.load(r"Imagenes\Enemigos\Muerte\0.png")]
+
+
+###SONIDOS###
+sonido_disparo = pygame.mixer.Sound("Audio/Sonidos/0001 [1].wav")
+sonido_disparo_enemigo = pygame.mixer.Sound("Audio/Sonidos/0002 [1].wav")
+
+
+###MUSICA###
+pygame.mixer.music.load("Audio/Musica/30. Dr. Wily 3.mp3")
+
